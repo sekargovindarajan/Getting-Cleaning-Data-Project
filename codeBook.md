@@ -1,10 +1,10 @@
 # Code Book for Processing Human Activity Data
 This code book contains information on processing of Human Activity Recognition data for the *Getting And Cleaning Data* course project.
 1. The section titled [Data]() describes the input and output datasets,
-2. The section titled [Variables]() describes the observed quantities, also known as variables or columns of the output dataset, and
+2. The section titled [Variables]() describes the observed quantities founds in the columns of the output dataset, and
 3. The section titled [Transformations]() details the steps involved in going from input to output dataset.
 
-Please refer to README.md in this repo for a description of the R scripts used in this project, and how they are connected.
+Please refer to [README.md](./README.md) in this repo for a description of the R scripts used in this project, and how they are connected.
 
 ## Data
 ### Input Dataset
@@ -12,16 +12,16 @@ Human Activity Recognition data from the following link is the input dataset for
 
 <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>.
 
-The input data is divided into training and test sets, which in turn contain 3 sets of data, subjects, activities and observations of the activities, respectively. For a more detailed description, please refer to the README.txt file contained in there, and
+The input data is divided into training and test sets, which in turn contain 3 sets of data, namely, subjects, activities and observations of the activities. For a more detailed description, please refer to the README.txt file contained therein, and
 
 <http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones>.
 
 ### Output Dataset
-The output data [tidyDataSet.txt](./tidyDataSet.txt) found in the repo contains averages of the variables grouped by subject ID and activity type. There are 180 rows (30 subjects times 6 activities) and 81 columns (subject ID, activity, followed by 79 mean and standard deviations). The variables are described below.
+The output data [tidyDataSet.txt](./tidyDataSet.txt) found in the repo contains averages of the variables grouped by subject ID and activity type. There are 180 rows (30 subjects times 6 activities), and 81 columns (subject ID, activity, followed by 79 mean and standard deviations). The variables are described below.
 
 ## Variables
 
-The variables are described along with their column Ids. All observations for these variables represent the average in its category.
+The variables are described along with their column Ids. All observations for these variables represent the average in each category.
 
 Time domain mean and standard deviation for body and gravity acceleration in each direction are given by these variables:
 ```
@@ -38,7 +38,7 @@ Time domain mean and standard deviation for body and gravity acceleration in eac
 [13] TimeDomainGravityAccelerometerStandardDeviationY              
 [14] TimeDomainGravityAccelerometerStandardDeviationZ              
 ```
-Time domain mean and standard deviation for body jerk (time derivative of acceleration) in each direction are given by these variables:
+Time domain mean and standard deviation for body jerk (time derivative of linear acceleration) in each direction are given by these variables:
 ```
 [15] TimeDomainBodyAccelerometerJerkMeanX                          
 [16] TimeDomainBodyAccelerometerJerkMeanY                          
@@ -137,15 +137,15 @@ The frequency domain mean, standard deviation and weighted frequency mean of mag
 ```
 
 ## Transformations
-All file references in this section are with respect to the directory `./data/UCI HAR Dataset`. After examining the unzipped files, the R script was written to affect the following transformations:
+All file references in this section are with respect to the R studio working directory `./data/UCI HAR Dataset`. After examining the unzipped files, the R script was written to affect the following transformations:
 
  * Activity and feature labels (measured/computed quantities) were found in `activity_labels.txt` and `features.txt`, respectively. These were read into two data frames.
  * Subject Id, activity Id and the observations for "training" datasets were found in `train/subject_train.txt`, `train/y_train.txt`, and `train/X_train.txt` respectively. These 3 datasets were column bound into a single training dataset.
- * Similar test dataset was created from the contents of `test` directory. Then this was dataset was row bound to the training dataset above. Finally column names were added from the feature labels.
- * Then the mean and standard deviation quantities were extracted out (by searching on `mean` and `std`) into its own dataset. At this stage the original training dataset was deleted in order to conser memory and improve performance.
+ * Similar test dataset was created from the contents of `test` directory. Then this dataset was row bound to the training dataset above. Finally column names were added from the feature labels.
+ * Then the mean and standard deviation quantities were extracted out (by searching on `mean` and `std`) into its own dataset. At this stage the original training dataset was deleted in order to conserve memory and improve performance.
  * The activity Ids were replaced with the activity labels.
  * Then the column names were changed to be more human readable. Key substitutions were:
-   + First letters `f` and `t` with `frequencyDomain` and `timeDomain`,
+   + First letters `f` and `t` with `FrequencyDomain` and `TimeDomain`,
    + `std`, `mean` and `mag` with `StandardDeviation`, `Mean` and `Magnitude`, and
    + Removal of punctuations such as `()-`.
  * Finally a tidy dataset was extracted by grouping the above dataset by subject Id and activity label, and then summarizing the data. The summarized data was written to `tidyDataSet.txt`.
