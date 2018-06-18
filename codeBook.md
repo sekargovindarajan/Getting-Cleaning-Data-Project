@@ -1,7 +1,7 @@
 # Code Book for Processing Human Activity Data
 This code book contains information on processing of Human Activity Recognition data for the *Getting And Cleaning Data* course project.
 1. The section titled [Data]() describes the input and output datasets,
-2. The section titled [Variables]() describes the observed quantities founds in the columns of the output dataset, and
+2. The section titled [Variables]() describes the observed quantities found in the columns of the output dataset, and
 3. The section titled [Transformations]() details the steps involved in going from input to output dataset.
 
 Please refer to [README.md](./README.md) in this repo for a description of the R scripts used in this project, and how they are connected.
